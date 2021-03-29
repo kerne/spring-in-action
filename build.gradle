@@ -1,0 +1,47 @@
+plugins {
+    id 'org.springframework.boot' version '2.4.0'
+    id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+    id 'java'
+}
+
+ext {
+    springVersion = '5.3.4'
+    lombok = '1.18.16'
+    logginModuleVersion = '1.0.0-SNAPSHOT'
+}
+
+group 'cl.caraya.action'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven {
+        url "gcs://txd-boss-dev-libraries"
+
+    }
+}
+
+dependencies {
+    // spring
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
+
+    // Lombok
+
+    //LOGGER
+    compile 'com.falabella.boss:falabella-logger:1.0.0-SNAPSHOT'
+//    implementation "com.falabella.boss:falabella-logging-spring-boot-starter:${logginModuleVersion}"
+
+    compileOnly 'org.projectlombok:lombok:1.18.16'
+    annotationProcessor 'org.projectlombok:lombok:1.18.16'
+    testCompileOnly 'org.projectlombok:lombok:1.18.16'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.16'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+}
+
+test {
+    useJUnitPlatform()
+}
