@@ -1,5 +1,6 @@
-package cl.caraya.action.beans;
+package cl.caraya.action.beans.custom;
 
+import cl.caraya.action.annotations.BeanQualified;
 import cl.caraya.action.domain.Person;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -8,16 +9,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Slf4j
+@BeanQualified
 @Component
 public class BeanImpl implements BeanServices {
 
+    @Autowired
     ObjectMapper mapper;
+
 
     @Override
     public Person print(Person msg) {
         try {
             if (msg.getId() == 123456789) {
-
                 log.info("{}", mapper.writeValueAsString(msg));
             }
             return msg;
@@ -26,8 +29,5 @@ public class BeanImpl implements BeanServices {
         }
     }
 
-    @Autowired
-    public void setMapper(ObjectMapper mapper) {
-        this.mapper = mapper;
-    }
+
 }

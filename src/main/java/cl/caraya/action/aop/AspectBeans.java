@@ -17,20 +17,19 @@ import java.util.Arrays;
 @Slf4j
 public class AspectBeans {
 
-    @Before("PointCutBeans.pointCut()")
-    public void before(JoinPoint joinPoint) {
-        log.info("{}", "before");
-    }
-
-    @After("PointCutBeans.pointCut()")
-    public void after() {
-        log.info("{}", "after");
-    }
+//    @Before("PointCutBeans.pointCut()")
+//    public void before(JoinPoint joinPoint) {
+//        log.info("{}", "before");
+//    }
+//
+//    @After("PointCutBeans.pointCut()")
+//    public void after() {
+//        log.info("{}", "after");
+//    }
 
     @Around("PointCutBeans.pointCut()")
     public Object watcher(ProceedingJoinPoint joinPoint) throws Throwable {
         log.info("Type {} method {} ", "around", joinPoint.getArgs());
-
 
         Arrays.stream(joinPoint.getArgs()).filter(e -> e instanceof Person)
                 .forEach(e -> {
