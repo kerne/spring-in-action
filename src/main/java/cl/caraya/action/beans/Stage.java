@@ -1,6 +1,5 @@
 package cl.caraya.action.beans;
 
-import com.falabella.boss.logging.annotation.Logging;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +11,6 @@ public class Stage {
         return Lazy.INSTACE;
     }
 
-    @Logging
     public void print(String name) {
         log.info("NAME", name);
     }

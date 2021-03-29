@@ -29,10 +29,6 @@ dependencies {
 
     // Lombok
 
-    //LOGGER
-    compile 'com.falabella.boss:falabella-logger:1.0.0-SNAPSHOT'
-//    implementation "com.falabella.boss:falabella-logging-spring-boot-starter:${logginModuleVersion}"
-
     compileOnly 'org.projectlombok:lombok:1.18.16'
     annotationProcessor 'org.projectlombok:lombok:1.18.16'
     testCompileOnly 'org.projectlombok:lombok:1.18.16'
