@@ -12,36 +12,8 @@
        https://www.springframework.org/schema/context/spring-context.xsd">
 
 
-<!--        <context:component-scan base-package="cl.caraya.action,-->
-<!--                                              com.falabella.boss.logging" />-->
-<!--        <aop:aspectj-autoproxy />-->
-<!--        <context:annotation-config />-->
-
-<!--&lt;!&ndash;        <bean id="beanServices" class="cl.caraya.action.beans.BeanImpl" scope="prototype">&ndash;&gt;-->
-<!--&lt;!&ndash;                <property name="another" ref="anotherBeans"/>&ndash;&gt;-->
-<!--&lt;!&ndash;        </bean>&ndash;&gt;-->
-<!--        <bean id="anotherBeans" class="cl.caraya.action.beans.AnotherBeans"/>-->
-
-<!--        <bean id="stage" class="cl.caraya.action.beans.Stage" factory-method="getInstance"/>-->
-
-<!--        <bean id="guitar" class="cl.caraya.action.beans.Guitar"/>-->
-<!--        <bean id="batery" class="cl.caraya.action.beans.Batery"/>-->
-
-<!--        <bean id="oneManBand" class="cl.caraya.action.beans.OneManBand">-->
-<!--                <property name="instrumentalList">-->
-<!--                        <map>-->
-<!--                                <entry key="batery" value-ref="batery" />-->
-<!--                                <entry key="guitar" value-ref="guitar" />-->
-<!--                        </map>-->
-<!--                </property>-->
-<!--                <property name="properties">-->
-<!--                        <props>-->
-<!--                                <prop key="one">Uno</prop>-->
-<!--                                <prop key="two">Dos</prop>-->
-<!--                                <prop key="three">Tres</prop>-->
-<!--                        </props>-->
-<!--                </property>-->
-<!--        </bean>-->
-
+    <context:component-scan base-package="cl.caraya.action"/>
+    <context:annotation-config/>
+    <aop:aspectj-autoproxy/>
 
 </beans>

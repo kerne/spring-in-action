@@ -2,28 +2,23 @@ package cl.caraya.action;
 
 import cl.caraya.action.beans.BeanServices;
 import cl.caraya.action.domain.Person;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-@SpringBootApplication
-public class Main implements CommandLineRunner {
-
-    @Autowired
-    BeanServices services;
+public class Main {
 
 
     public static void main(String[] args) {
-        SpringApplication.run(Main.class);
+        BeanServices services = (BeanServices) getBean("beanImpl");
+        System.out.println(services.print(Person.builder().name("Cesar").build()));
     }
 
+    public static Object getBean(String name) {
+        return Context.INSTANCE.getBean(name);
+    }
 
-    @Override
-    public void run(String... args) throws JsonProcessingException {
-
-        System.out.println(services.print(Person.builder().name("Cesar").build()));
-
+    static class Context {
+        private static final ApplicationContext INSTANCE =
+                new ClassPathXmlApplicationContext("cl/caraya/action/caraya-action.xml");
     }
 }
