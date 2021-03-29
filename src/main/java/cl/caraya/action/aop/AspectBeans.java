@@ -17,31 +17,26 @@ import java.util.Arrays;
 @Slf4j
 public class AspectBeans {
 
-//    @Before("PointCutBeans.pointCut()")
-//    public void before(JoinPoint joinPoint) {
-//        log.info("{}", "before");
-//    }
-//
-//    @After("PointCutBeans.pointCut()")
-//    public void after() {
-//        log.info("{}", "after");
-//    }
+    @Before("PointCutBeans.pointCut()")
+    public void before(JoinPoint joinPoint) {
+        log.info("{}", "before");
+    }
+
+    @After("PointCutBeans.pointCut()")
+    public void after() {
+        log.info("{}", "after");
+    }
 
     @Around("PointCutBeans.pointCut()")
     public Object watcher(ProceedingJoinPoint joinPoint) throws Throwable {
         log.info("Type {} method {} ", "around", joinPoint.getArgs());
 
 
-        Arrays.asList(joinPoint.getArgs()).stream().filter(e -> e instanceof Person)
+        Arrays.stream(joinPoint.getArgs()).filter(e -> e instanceof Person)
                 .forEach(e -> {
                     Person p = (Person) e;
                     p.setId(123456789);
-                    log.info("AAAAAAA {}", p.getName());
                 });
-
-        if(joinPoint.getTarget() instanceof Person){
-
-        }
 
         Person response = (Person) joinPoint.proceed();
         response.setCtaCte("XXXX");
