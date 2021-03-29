@@ -8,6 +8,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * BeanImpl annotated as BeanQualified to different it of another bean that implement interfaces BeanServices
+ */
 @Slf4j
 @BeanQualified
 @Component
@@ -20,9 +23,7 @@ public class BeanImpl implements BeanServices {
     @Override
     public Person print(Person msg) {
         try {
-            if (msg.getId() == 123456789) {
-                log.info("{}", mapper.writeValueAsString(msg));
-            }
+            log.info("{}", mapper.writeValueAsString(msg));
             return msg;
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e.getMessage());
