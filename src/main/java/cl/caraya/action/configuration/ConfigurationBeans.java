@@ -1,13 +1,12 @@
 package cl.caraya.action.configuration;
 
-import cl.caraya.action.beans.custom.BeanImpl;
-import cl.caraya.action.beans.custom.BeanServices;
-import cl.caraya.action.beans.custom.CheckingBeans;
-import cl.caraya.action.beans.custom.DuplicateBeanImpl;
+import cl.caraya.action.beans.requeridconstructor.RequiredBeanImpl;
+import cl.caraya.action.beans.requeridconstructor.RequiredBeanService;
+import cl.caraya.action.beans.requeridconstructor.RequiredConstructorBean;
+import cl.caraya.action.beans.requeridconstructor.RequiredConstructorImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 
 @Configuration
 public class ConfigurationBeans {
@@ -15,6 +14,16 @@ public class ConfigurationBeans {
     public ObjectMapper objectMapper() {
         return new ObjectMapper();
     }
+
+    @Bean
+    public RequiredConstructorBean requiredConstructorBean(RequiredBeanService service) {
+        return new RequiredConstructorImpl(service);
+    }
+    @Bean
+    public RequiredBeanService requiredBeanService() {
+        return new RequiredBeanImpl();
+    }
+
 //
 //    @Bean
 //    @Primary

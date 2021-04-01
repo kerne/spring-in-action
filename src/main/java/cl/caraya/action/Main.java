@@ -1,7 +1,6 @@
 package cl.caraya.action;
 
-import cl.caraya.action.beans.custom.CheckingBeans;
-import cl.caraya.action.domain.Person;
+import cl.caraya.action.beans.requeridconstructor.RequiredConstructorBean;
 import lombok.extern.slf4j.Slf4j;
 
 import static cl.caraya.action.context.ConfigurationContext.getBean;
@@ -13,10 +12,8 @@ import static cl.caraya.action.context.ConfigurationContext.getBean;
 public class Main {
 
     public static void main(String[] args) {
-        CheckingBeans services = (CheckingBeans) getBean(CheckingBeans.class);
-        Person request = Person.builder().name("Cesar").build();
-
-        log.info("Final Response {}", services.check(request));
+        RequiredConstructorBean services = (RequiredConstructorBean) getBean(RequiredConstructorBean.class);
+        services.required();
     }
 
 }
