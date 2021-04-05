@@ -1,12 +1,16 @@
 package cl.caraya.action.aop;
 
 import cl.caraya.action.annotations.Logging;
+import cl.caraya.action.annotations.NotLogging;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.MDC;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.lang.annotation.Annotation;
@@ -22,14 +26,23 @@ import java.util.stream.IntStream;
 @Component
 @Slf4j
 public class AspectLogging {
-    private final Predicate<Annotation> isAnnotationLoggable = annotation -> (annotation instanceof Logging);
+    private final Predicate<Annotation> isAnnotationLoggable = annotation -> !(annotation instanceof NotLogging);
+
+    @Autowired
+    ObjectMapper objectMapper;
 
 
     @Around("PointCutBeans.pointCutLogging(logging)")
     public void aroundLogging(ProceedingJoinPoint joinPoint, Logging logging) throws Throwable {
         MDC.put("mdcName", "NAME");
         getMethodParameters(joinPoint).ifPresent(
-                paramValues -> log.info("{}", paramValues)
+                paramValues -> {
+                    try {
+                        log.info("{}", objectMapper.writeValueAsString(paramValues));
+                    } catch (JsonProcessingException e) {
+                        e.printStackTrace();
+                    }
+                }
         );
 
         joinPoint.proceed();

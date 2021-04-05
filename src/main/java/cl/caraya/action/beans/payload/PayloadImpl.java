@@ -1,6 +1,7 @@
 package cl.caraya.action.beans.payload;
 
 import cl.caraya.action.annotations.Logging;
+import cl.caraya.action.annotations.NotLogging;
 import cl.caraya.action.annotations.Payload;
 import cl.caraya.action.domain.PayLoadDTO;
 import lombok.extern.slf4j.Slf4j;
@@ -13,7 +14,6 @@ public class PayloadImpl implements PayloadService {
     @Override
     @Payload
     @Logging
-    public void payload(PayLoadDTO payLoadDTO, String payload) {
-        log.info("PayLoad String {}", payload);
+    public void payload(PayLoadDTO payLoadDTO, @NotLogging String payload) {
     }
 }
