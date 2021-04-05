@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Pointcut;
+import org.slf4j.MDC;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -17,12 +17,9 @@ import java.util.Optional;
 @Slf4j
 public class AspectPayload {
 
-    @Pointcut("@annotation(payload)")
-    public void pointCut(Payload payload) {
-    }
 
-    @Around("pointCut(payload)")
-    public void around(ProceedingJoinPoint joinPoint, Payload payload) throws Throwable {
+    @Around("PointCutBeans.pointCutPayload(payload)")
+    public void aroundPayload(ProceedingJoinPoint joinPoint, Payload payload) throws Throwable {
         if (joinPoint.getArgs().length == 2) {
             Optional<Object> opPayload = Arrays.stream(joinPoint.getArgs())
                     .filter(e -> e instanceof PayLoadDTO)
@@ -30,6 +27,7 @@ public class AspectPayload {
 
             if (opPayload.isPresent()) {
                 PayLoadDTO payLoadDTO = (PayLoadDTO) opPayload.get();
+                MDC.put("mdcName", payLoadDTO.getName());
                 joinPoint.proceed(new Object[]{payLoadDTO, payLoadDTO.toString()});
             }
             return;

@@ -15,6 +15,7 @@ public class Main {
     public static void main(String[] args) {
         PayloadService services = (PayloadService) getBean(PayloadService.class);
         services.payload(PayLoadDTO.builder().name("Cesar").lastName("ARaya").build(), null);
+        services.payload(PayLoadDTO.builder().name("Patricio").lastName("ARaya").build(), null);
     }
 
 }
