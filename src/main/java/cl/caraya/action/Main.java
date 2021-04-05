@@ -1,6 +1,7 @@
 package cl.caraya.action;
 
-import cl.caraya.action.beans.requeridconstructor.RequiredConstructorBean;
+import cl.caraya.action.beans.payload.PayloadService;
+import cl.caraya.action.domain.PayLoadDTO;
 import lombok.extern.slf4j.Slf4j;
 
 import static cl.caraya.action.context.ConfigurationContext.getBean;
@@ -12,8 +13,8 @@ import static cl.caraya.action.context.ConfigurationContext.getBean;
 public class Main {
 
     public static void main(String[] args) {
-        RequiredConstructorBean services = (RequiredConstructorBean) getBean(RequiredConstructorBean.class);
-        services.required();
+        PayloadService services = (PayloadService) getBean(PayloadService.class);
+        services.payload(PayLoadDTO.builder().name("Cesar").lastName("ARaya").build(), null);
     }
 
 }
